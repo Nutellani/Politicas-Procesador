@@ -31,9 +31,13 @@ QUANTUM = 20        # quantum de tiempo para Round Robin
 
 
 P1 = createProcess("P1")
+print(P1)
 P2 = createProcess("P2")
+print(P2)
 P3 = createProcess("P3")
+print(P3)
 P4 = createProcess("P4")
+print(P4)
 
 # amountGusts = int(input("Cuántas ráfagas tiene el Proceso P1 ?? "))
 # for i in range(0, amountGusts):
