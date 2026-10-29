@@ -1,7 +1,29 @@
 from Process import Process
 
-def showHeaderMatrix(HEADER_MATRIX):
-    print(HEADER_MATRIX)
+def showHeaderMatrix(HEADER_MATRIX, exeMatrix):
+    
+    # para concatenar automaticamente en Python es...
+    # for i in range(len(HEADER_MATRIX)):
+    #     filaPrint = [HEADER_MATRIX[i], exeMatrix[i]]
+    #     print(filaPrint)
+        
+    # que es lo mismo que hacer...
+    
+    matrizPrint = []
+    
+    for i in range(len(matrizPrint)):
+        print(matrizPrint[i])
+    
+    for i in range(len(HEADER_MATRIX)):
+        fila = []
+        for j in range(len(HEADER_MATRIX[i])):
+            fila.append(HEADER_MATRIX[i][j])
+            
+        for j in range(len(exeMatrix[i])):
+            fila.append(exeMatrix[i][j])
+            
+        matrizPrint.append(fila)
+    
 
 def createProcess(name):
 
@@ -66,24 +88,11 @@ exeMatrix = [
     ["algo"],
     ["algo"],
     ["algo"]
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # [],
-    # []
 ]
 
 # ---------- Comienzo Main ---------- 
 
-showHeaderMatrix(HEADER_MATRIX,exeMatrix)
+showHeaderMatrix(HEADER_MATRIX, exeMatrix)
 
 P1 = createProcess("P1")
 print(P1)
