@@ -1,30 +1,25 @@
 from Process import Process
 
+def startExecution():
+    ...
+
+def fillLlamada(processes):
+    top = 0
+    for i in range(len(processes)):
+        if top > processes[i].call:
+            top = processes[i].call
+
+    # TODO: sort de processes.call y llenar la fila de "Llegada en"
+
+    return
+
 def showHeaderMatrix(HEADER_MATRIX, exeMatrix):
     
-    # para concatenar automaticamente en Python es...
-    # for i in range(len(HEADER_MATRIX)):
-    #     filaPrint = [HEADER_MATRIX[i], exeMatrix[i]]
-    #     print(filaPrint)
-        
-    # que es lo mismo que hacer...
-    
-    matrizPrint = []
-    
-    for i in range(len(matrizPrint)):
-        print(matrizPrint[i])
-    
+    # para insertar ambas LISTAS dentro de otra es...
     for i in range(len(HEADER_MATRIX)):
-        fila = []
-        for j in range(len(HEADER_MATRIX[i])):
-            fila.append(HEADER_MATRIX[i][j])
-            
-        for j in range(len(exeMatrix[i])):
-            fila.append(exeMatrix[i][j])
-            
-        matrizPrint.append(fila)
-    
-
+        filaPrint = [HEADER_MATRIX[i], exeMatrix[i]]
+        print(filaPrint)
+        
 def createProcess(name):
 
     newProcess = Process()
@@ -46,13 +41,22 @@ def ask4Gusts():
         gusts.append(valor)
         
     return gusts
-     
+    
 # ---------- Variables ---------- 
 
-ENTRY_EXIT = 30     # tiempo predeterminado que demoran los procesos en pedir datos
-S_O_USAGE = 10      # timepo que hace uso
-QUANTUM = 20        # quantum de tiempo para Round Robin
-totalTime = 0       # tiempo total usado del Procesador
+ENTRY_EXIT = 3          # tiempo predeterminado que demoran los procesos en pedir datos
+S_O_USAGE = 1           # timepo que hace uso
+QUANTUM = 2             # quantum de tiempo para Round Robin
+all_Finished = False    # estara en FALSE hasta que todos los procesos finalicen
+totalTime = 0           # tiempo total usado del Procesador
+
+# ---------- Orden Prioridades ----------
+
+# 1_ Procesador Ocupado - S.O. Ocupado
+#                       -> P -> T -> Bloqueado
+# 2_ Hay Nuevo?
+# 3_ Hay Bloq?
+# 4_ Listo -> Exe
 
 # ---------- Matriz CONSTANTE ---------- 
 
@@ -72,7 +76,7 @@ HEADER_MATRIX = [
     ["Llamada: ", "      "]
 ]
 
-# ---------- Matriz De Ejecicion ---------- 
+# ---------- Matriz De Ejecicion ----------                                                                                                             me jijie
 
 exeMatrix = [
     ["algo"],
@@ -102,3 +106,8 @@ P3 = createProcess("P3")
 print(P3)
 P4 = createProcess("P4")
 print(P4)
+
+processes = [P1, P2, P3, P4]
+
+fillLlamada(processes)
+startExecution()
