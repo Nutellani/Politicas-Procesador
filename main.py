@@ -1,64 +1,69 @@
 from Process import Process
 
+
 def startExecution():
     # TODO-> comienzo de discriminacion de procesos ...
     ...
+
 
 def sortCalls(processes):
     calls = [p1.call, p2.call, p3.call, p4.call]
     callsOrdened = sorted(calls)
     return callsOrdened
 
-def fillLlamada(processes):
+def fillLlamada(processes, exeMatrix):
 
-    calls = sortCalls(processes)
+    calls = [p1.call, p2.call, p3.call, p4.call]
+    calls = sorted(calls)
 
-    for i in range(calls[4] + 1):
-        
-        calls.append(calls[i])
+    # calls[3] -> es el ultimo valor a rellenar en Llamada: y el +1 es porque se empieza del cero
+    for i in range(calls[3] + 1): 
+
+        exeMatrix[12].append("     ") # espacio justo para por ej: " 3P1 "
+        if (i + 1) == (calls[0]):
+            exeMatrix[12][i].insert(calls[0]) # TODO-> ver como concatenar lo con el espacio
+            calls.pop(0)
 
     print(calls)
 
     # TODO-> sort de processes.call y llenar la fila de "Llegada en"
 
-    return
-
 def showHeaderMatrix(HEADER_MATRIX, exeMatrix):
-    
+
     # para insertar ambas LISTAS dentro de otra es...
     for i in range(len(HEADER_MATRIX)):
         filaPrint = [HEADER_MATRIX[i], exeMatrix[i]]
         print(filaPrint)
-        
+
 def createProcess(name):
 
     newProcess = Process()
-    
+
     print("\nVa a ingresar datos del proceso " + name)
     newProcess.name = name
     newProcess.call = int(input("En que quantum de tiempo se ingresa este proceso?: "))
     newProcess.gusts = ask4Gusts()
-    
+
     return newProcess
 
 def ask4Gusts():
     gusts = []
-    
+
     ammount = int(input("De cuántas ráfagas es este proceso?: "))
 
     for i in range(ammount):
         valor = int(input(f"Ingresa el valor de la ráfaga {i + 1}: "))
         gusts.append(valor)
-        
+
     return gusts
 
-# ---------- Variables ---------- 
+# ---------- Variables ----------
 
-ENTRY_EXIT = 3          # tiempo predeterminado que demoran los procesos en pedir datos
-S_O_USAGE = 1           # timepo que hace uso
-QUANTUM = 2             # quantum de tiempo para Round Robin
-all_Finished = False    # estara en FALSE hasta que todos los procesos finalicen
-totalTime = 0           # tiempo total usado del Procesador
+ENTRY_EXIT = 3  # tiempo predeterminado que demoran los procesos en pedir datos
+S_O_USAGE = 1  # timepo que hace uso
+QUANTUM = 2  # quantum de tiempo para Round Robin
+all_Finished = False  # estara en FALSE hasta que todos los procesos finalicen
+totalTime = 0  # tiempo total usado del Procesador
 
 # ---------- Orden Prioridades ----------
 
@@ -68,7 +73,7 @@ totalTime = 0           # tiempo total usado del Procesador
 # 3_ Hay Bloq?
 # 4_ Listo -> Exe
 
-# ---------- Matriz CONSTANTE ---------- 
+# ---------- Matriz CONSTANTE ----------
 
 HEADER_MATRIX = [
     ["Terminado", "      "],
@@ -83,39 +88,28 @@ HEADER_MATRIX = [
     ["    L    ", " P4   "],
     ["         ", " S.O. "],
     [" Tiempo  ", "      "],
-    ["Llamada: ", "      "]
+    ["Llamada: ", "      "],
 ]
 
 # ---------- Matriz De Ejecicion ----------                                                                                                             me jijié
 
 exeMatrix = [
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"],
-    ["algo"]
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["0    "],
+    [],
 ]
 
-# ---------- Comienzo Main ---------- 
-p1 = Process("P1", 1, [2, 3])
-p2 = Process("P2", 2, [3, 1, 2])
-p3 = Process("P3", 4, [2, 2])
-p4 = Process("P4", 6, [3, 1])
-
-calls = [p1.call, p2.call, p3.call, p4.call]
-callsOrdened = sorted(calls)
-print(range(calls[3]))
-
-showHeaderMatrix(HEADER_MATRIX, exeMatrix)
-
+# ---------- Comienzo Main ----------
 
 # P1 = createProcess("P1")
 # print(P1)
@@ -126,7 +120,14 @@ showHeaderMatrix(HEADER_MATRIX, exeMatrix)
 # P4 = createProcess("P4")
 # print(P4)
 
+p1 = Process("P1", 1, [2, 3])
+p2 = Process("P2", 2, [3, 1, 2])
+p3 = Process("P3", 4, [2, 2])
+p4 = Process("P4", 6, [3, 1])
+
 processes = [p1, p2, p3, p4]
 
-fillLlamada(processes)
+fillLlamada(processes, exeMatrix)
 startExecution()
+
+showHeaderMatrix(HEADER_MATRIX, exeMatrix)
