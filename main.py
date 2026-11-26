@@ -1,15 +1,25 @@
 from Process import Process
 
 def startExecution():
+    # TODO-> comienzo de discriminacion de procesos ...
     ...
 
-def fillLlamada(processes):
-    top = 0
-    for i in range(len(processes)):
-        if top > processes[i].call:
-            top = processes[i].call
+def sortCalls(processes):
+    calls = [p1.call, p2.call, p3.call, p4.call]
+    callsOrdened = sorted(calls)
+    return callsOrdened
 
-    # TODO: sort de processes.call y llenar la fila de "Llegada en"
+def fillLlamada(processes):
+
+    calls = sortCalls(processes)
+
+    for i in range(calls[4] + 1):
+        
+        calls.append(calls[i])
+
+    print(calls)
+
+    # TODO-> sort de processes.call y llenar la fila de "Llegada en"
 
     return
 
@@ -41,7 +51,7 @@ def ask4Gusts():
         gusts.append(valor)
         
     return gusts
-    
+
 # ---------- Variables ---------- 
 
 ENTRY_EXIT = 3          # tiempo predeterminado que demoran los procesos en pedir datos
@@ -76,7 +86,7 @@ HEADER_MATRIX = [
     ["Llamada: ", "      "]
 ]
 
-# ---------- Matriz De Ejecicion ----------                                                                                                             me jijie
+# ---------- Matriz De Ejecicion ----------                                                                                                             me jijié
 
 exeMatrix = [
     ["algo"],
@@ -95,19 +105,28 @@ exeMatrix = [
 ]
 
 # ---------- Comienzo Main ---------- 
+p1 = Process("P1", 1, [2, 3])
+p2 = Process("P2", 2, [3, 1, 2])
+p3 = Process("P3", 4, [2, 2])
+p4 = Process("P4", 6, [3, 1])
+
+calls = [p1.call, p2.call, p3.call, p4.call]
+callsOrdened = sorted(calls)
+print(range(calls[3]))
 
 showHeaderMatrix(HEADER_MATRIX, exeMatrix)
 
-P1 = createProcess("P1")
-print(P1)
-P2 = createProcess("P2")
-print(P2)
-P3 = createProcess("P3")
-print(P3)
-P4 = createProcess("P4")
-print(P4)
 
-processes = [P1, P2, P3, P4]
+# P1 = createProcess("P1")
+# print(P1)
+# P2 = createProcess("P2")
+# print(P2)
+# P3 = createProcess("P3")
+# print(P3)
+# P4 = createProcess("P4")
+# print(P4)
+
+processes = [p1, p2, p3, p4]
 
 fillLlamada(processes)
 startExecution()
