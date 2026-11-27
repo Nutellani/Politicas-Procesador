@@ -1,32 +1,24 @@
 from Process import Process
 
-
 def startExecution():
     # TODO-> comienzo de discriminacion de procesos ...
     ...
+    
+def fillLlamada(exeMatrix): # TODO->
 
-
-def sortCalls(processes):
-    calls = [p1.call, p2.call, p3.call, p4.call]
-    callsOrdened = sorted(calls)
-    return callsOrdened
-
-def fillLlamada(processes, exeMatrix):
-
-    calls = [p1.call, p2.call, p3.call, p4.call]
-    calls = sorted(calls)
+    aux = 0
 
     # calls[3] -> es el ultimo valor a rellenar en Llamada: y el +1 es porque se empieza del cero
-    for i in range(calls[3] + 1): 
+    for i in range(processes[3].call + 1):
 
-        exeMatrix[12].append("     ") # espacio justo para por ej: " 3P1 "
-        if (i + 1) == (calls[0]):
-            exeMatrix[12][i].insert(calls[0]) # TODO-> ver como concatenar lo con el espacio
-            calls.pop(0)
+        exeMatrix[INDEX_CALL_IN].append("     ") # espacio justo para por ej: " 3P1 "
+        if i == processes[aux].call:
 
-    print(calls)
+            exeMatrix[INDEX_CALL_IN][i] = f"  {processes[aux].call:<3}"
+            aux += 1
+            
+    # TODO-> ver como concatenar lo con el espacio            
 
-    # TODO-> sort de processes.call y llenar la fila de "Llegada en"
 
 def showHeaderMatrix(HEADER_MATRIX, exeMatrix):
 
@@ -63,7 +55,9 @@ ENTRY_EXIT = 3  # tiempo predeterminado que demoran los procesos en pedir datos
 S_O_USAGE = 1  # timepo que hace uso
 QUANTUM = 2  # quantum de tiempo para Round Robin
 all_Finished = False  # estara en FALSE hasta que todos los procesos finalicen
-totalTime = 0  # tiempo total usado del Procesador
+total_time_executed = 0  # tiempo total usado del Procesador
+
+INDEX_CALL_IN = 12
 
 # ---------- Orden Prioridades ----------
 
@@ -105,29 +99,30 @@ exeMatrix = [
     [],
     [],
     [],
-    ["0    "],
+    ["0    "], # con esos espacios tienen que quedar
     [],
 ]
 
 # ---------- Comienzo Main ----------
 
-# P1 = createProcess("P1")
-# print(P1)
-# P2 = createProcess("P2")
-# print(P2)
-# P3 = createProcess("P3")
-# print(P3)
-# P4 = createProcess("P4")
-# print(P4)
+# p1 = createProcess("P1")
+# print(p1)
+# p2 = createProcess("P2")
+# print(p2)
+# p3 = createProcess("P3")
+# print(p3)
+# p4 = createProcess("P4")
+# print(p4)
 
 p1 = Process("P1", 1, [2, 3])
 p2 = Process("P2", 2, [3, 1, 2])
 p3 = Process("P3", 4, [2, 2])
 p4 = Process("P4", 6, [3, 1])
 
-processes = [p1, p2, p3, p4]
+processes = sorted([p1, p2, p3, p4], key=lambda p:p.call )
 
-fillLlamada(processes, exeMatrix)
+fillLlamada(exeMatrix)
+
 startExecution()
 
 showHeaderMatrix(HEADER_MATRIX, exeMatrix)
